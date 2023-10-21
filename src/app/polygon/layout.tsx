@@ -7,9 +7,9 @@ export default function PolygonLayout({
 }) {
   return (
     <div className="flex gap-2">
-      <div className="px-2 py-1">
+      {/* <div className="px-2 py-1">
         <Nav />
-      </div>
+      </div> */}
       <div className="px-2 py-1">{children}</div>
     </div>
   );
