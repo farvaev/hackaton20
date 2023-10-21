@@ -36,7 +36,7 @@ export default function WS() {
         send ws message{" "}
         <div>
           <Input name="msg" />{" "}
-          <button className="p-2 text-white bg-Green rounded-sm" type="submit">
+          <button className="p-2 text-white bg-Red rounded-sm" type="submit">
             send
           </button>
         </div>

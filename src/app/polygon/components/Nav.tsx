@@ -5,7 +5,7 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <Link href={"/polygon"}>Главная</Link>
+          <Link href={"/"}>Главная</Link>
         </li>
       </ul>
     </nav>
