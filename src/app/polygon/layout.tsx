@@ -6,7 +6,7 @@ export default function PolygonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-2">
+    <div>
       {/* <div className="px-2 py-1">
         <Nav />
       </div> */}

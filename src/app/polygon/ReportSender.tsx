@@ -7,9 +7,9 @@ export function ReportSender() {
   const { mutate: send, error, isPending, data: response } = useSendReport();
 
   return (
-    <div className="p-2">
+    <div className="flex flex-col gap-2 items-stretch">
       <button
-        className="text-lg text-white bg-Red rounded-md px-2 py-1 disabled:animate-pulse disabled:opacity-70"
+        className="block w-full text-white bg-Red rounded-sm px-2 py-1 disabled:animate-pulse disabled:opacity-70"
         onClick={() => {
           send(generateReport());
         }}
@@ -18,14 +18,16 @@ export function ReportSender() {
         Отправить ошибку
       </button>
       {error ? (
-        <div className="p-2 text-Red bg-Red/20">
+        <div className="rounded-sm p-2 text-Red bg-Red/20">
           Не удалось отправить отчёт:
           <br />
           {error + ""}
         </div>
       ) : null}
       {response ? (
-        <div className="p-2 text-Red bg-Red/20">{response.message}</div>
+        <div className="rounded-sm p-2 text-Red bg-Red/20">
+          {response.message}
+        </div>
       ) : null}
     </div>
   );
