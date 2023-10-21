@@ -1,12 +1,12 @@
-import ApiTest from "@/components/ApiTest";
+import Register from "@/components/test/Register";
+import WS from "@/components/test/WS";
 
 export default function Home() {
   return (
     <main>
-      start here
-      <div>
-        <ApiTest />
-      </div>
+      <Register />
+      <hr />
+      <WS />
     </main>
   );
 }
