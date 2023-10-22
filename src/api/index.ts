@@ -83,3 +83,14 @@ export function useCurrentUser() {
     },
   });
 }
+
+type TSaveCommentBody = { category_id: number; text: string };
+const saveComment = (data: TSaveCommentBody) =>
+  axios.post("/api/manager/category/comment", data);
+export function useSaveComment() {
+  return useMutation<void, unknown, TSaveCommentBody>({
+    mutationFn: (data) => {
+      return saveComment(data).then((res) => res.data);
+    },
+  });
+}
