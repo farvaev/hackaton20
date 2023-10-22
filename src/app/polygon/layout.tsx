@@ -3,6 +3,7 @@
 import { useCurrentUser } from "@/api";
 import { useWebsocket } from "@/websocket";
 import Link from "next/link";
+import React from "react";
 import toast from "react-hot-toast";
 
 export default function PolygonLayout({
@@ -16,12 +17,14 @@ export default function PolygonLayout({
     toast.success(
       (t) => {
         return (
-          <div
-            className="break-words text-sm"
-            style={{ wordBreak: "break-all" }}
-          >
-            {msg}
-            <br />
+          <div>
+            <div
+              className="break-words text-sm line-clamp-6"
+              // @ts-ignore
+              style={{ wordBreak: "break-word" }}
+            >
+              {msg}
+            </div>
             <button
               className="mt-2 text-xs py-1 leading-none inline-block cursor-pointer text-Gray hover:text-Black underline hover:decoration-transparent"
               onClick={() => toast.dismiss(t.id)}

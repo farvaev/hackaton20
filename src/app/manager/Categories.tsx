@@ -152,7 +152,7 @@ const Category = ({ category }: { category: TCategory }) => {
           <div className="text-xs text-Red py-1">{JSON.stringify(error)}</div>
         ) : null}
         <div className="mt-2">
-          <label className="inline-flex items-center gap-2 text-slate-600 text-sm">
+          <label className="inline-flex items-center gap-2 text-slate-600 text-sm cursor-pointer">
             <input
               className="accent-green-600 cursor-pointer"
               type="checkbox"
