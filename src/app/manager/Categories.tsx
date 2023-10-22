@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export function Categories() {
-  const { data: categories } = useCategories();
+  const { data: categories, isLoading } = useCategories();
 
   useEffect(() => {
     if (!categories) return;
@@ -19,9 +19,12 @@ export function Categories() {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-2 px-2 py-3 rounded-md my-2 bg-slate-100 max-h-[512px] min-h-[320px]">
+      <div className="grid grid-cols-3 gap-2 px-2 py-3 rounded-md my-4 bg-slate-100 max-h-[512px] min-h-[320px]">
         <div className="pr-2 border-r border-solid border-slate-300">
           <ul className="flex flex-col items-stretch gap-1 text-slate-700">
+            {isLoading ? (
+              <div className="text-slate-500 text-sm">Загрузка...</div>
+            ) : null}
             {categories?.map((category) => {
               const selectedClass =
                 category.id === categoryId
