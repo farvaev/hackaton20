@@ -1,12 +1,15 @@
-import { rand } from "@/utils";
+import { formatDate, rand } from "@/utils";
 import { TReport } from ".";
 
 export function generateReport(): TReport {
   const a = mockErrors[rand(0, mockErrors.length - 1)];
+  const date = formatDate(new Date());
+
   return {
     ...a,
-    created_at: new Date().toString(),
-    report_id: new Date().getTime() + "",
+    created_at: date,
+    created_date: date,
+    report_id: new Date().getTime() + "-" + rand(1000000, 9999999),
   };
 }
 

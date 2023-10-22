@@ -4,7 +4,8 @@ import axios from "axios";
 export type TReport = {
   report_id: string;
   log: string;
-  created_at: Date | string;
+  created_date: string;
+  created_at: string;
 };
 export function sendErrorOriginal(report: TReport) {
   return axios.post("/api/user/report", report);
