@@ -1,6 +1,8 @@
 "use client";
 
 import { useCurrentUser } from "@/api";
+import { useWebsocket } from "@/websocket";
+import toast from "react-hot-toast";
 
 export default function PolygonLayout({
   children,
@@ -8,6 +10,10 @@ export default function PolygonLayout({
   children: React.ReactNode;
 }) {
   const { data: user, isLoading } = useCurrentUser();
+
+  useWebsocket((msg) => {
+    toast.success(msg);
+  });
 
   return (
     <div>

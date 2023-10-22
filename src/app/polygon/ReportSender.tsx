@@ -2,15 +2,9 @@
 
 import { useSendReport } from "@/api";
 import { generateReport } from "@/api/mocks";
-import { useWebsocket } from "@/websocket";
-import { toast } from "react-hot-toast";
 
 export function ReportSender() {
   const { mutate: send, error, isPending, data: response } = useSendReport();
-
-  useWebsocket((msg) => {
-    toast(msg);
-  });
 
   return (
     <div className="flex flex-col gap-2">
