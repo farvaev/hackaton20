@@ -152,14 +152,31 @@ export function useSaveComment() {
   });
 }
 
-
-const doneCategory = (category_id: number) => (
-  axios.get(`/api/manager/category/done/${category_id}`)
-)
+const doneCategory = (category_id: number) =>
+  axios.get(`/api/manager/category/done/${category_id}`);
 export function useDoneCategory(category_id: number) {
+  const client = useQueryClient();
+
   return useMutation({
     mutationFn: () => {
-      return doneCategory(category_id).then((res) => res.data)
-    }
-  })
+      return doneCategory(category_id).then((res) => {
+        client.setQueryData<TCategoriesResponse["categories"]>(
+          ["categories"],
+          (old) => {
+            if (!old) return old;
+            return old.map((c) => {
+              if (c.id === category_id) {
+                return {
+                  ...c,
+                  is_done: true,
+                };
+              } else {
+                return c;
+              }
+            });
+          }
+        );
+      });
+    },
+  });
 }
