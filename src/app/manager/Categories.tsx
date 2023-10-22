@@ -1,6 +1,6 @@
 "use client";
 
-import { TCategory, useCategories, useReports, useSaveComment } from "@/api";
+import { TCategory, useCategories, useDoneCategory, useReports, useSaveComment } from "@/api";
 import Input from "@/ui/Input";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -67,6 +67,7 @@ const Category = ({ category }: { category: TCategory }) => {
   const len = reportsData?.pages.reduce((length, page) => {
     return length + page.length;
   }, 0);
+  const { mutateAsync: doneCategory, isPending: isDonePending } = useDoneCategory(category.id)
 
   return (
     <div
@@ -149,11 +150,12 @@ const Category = ({ category }: { category: TCategory }) => {
               className="accent-green-600 cursor-pointer"
               type="checkbox"
               defaultChecked={false}
+              disabled={isDonePending}
               onChange={(e) => {
                 const input = e.target as HTMLInputElement;
 
                 if (input.checked) {
-                  // send request
+                  doneCategory()
                 }
               }}
             />{" "}

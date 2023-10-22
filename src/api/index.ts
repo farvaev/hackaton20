@@ -151,3 +151,15 @@ export function useSaveComment() {
     },
   });
 }
+
+
+const doneCategory = (category_id: number) => (
+  axios.get(`/api/manager/category/done/${category_id}`)
+)
+export function useDoneCategory(category_id: number) {
+  return useMutation({
+    mutationFn: () => {
+      return doneCategory(category_id).then((res) => res.data)
+    }
+  })
+}
