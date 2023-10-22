@@ -1,6 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 import React, { useState } from "react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -13,10 +14,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             staleTime: 1000 * 10,
           },
         },
-      }),
+      })
   );
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <Toaster />
+      {children}
+    </QueryClientProvider>
   );
 }
