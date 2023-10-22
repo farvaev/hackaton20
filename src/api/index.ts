@@ -18,6 +18,11 @@ export function useSendReport() {
   });
 }
 
+if (typeof window !== undefined) {
+  // @ts-ignore
+  window.axios = axios;
+}
+
 type TRegisterBody = { name: string; password: string };
 export function register(data: TRegisterBody) {
   return axios.post("/api/user", data);
@@ -36,9 +41,7 @@ export type TCategory = {
   name: string;
   count: number;
   is_done: boolean;
-  comment: {
-    text: string;
-  };
+  comment: string;
 };
 export type TCategoriesResponse = {
   categories: Array<TCategory>;
@@ -91,14 +94,16 @@ export function useReports(category: number) {
       });
     },
     initialPageParam: 0,
-    getNextPageParam: (_, pages) => {
-      return pages.reduce((length, page) => {
+    getNextPageParam: (_, pages, prevParam) => {
+      const count = pages.reduce((length, page) => {
         return length + page.length;
       }, 0);
+      return count === prevParam ? undefined : count;
     },
   });
 }
 
+// user
 type TUser = { name: string; id: string };
 export function getCurrentUser() {
   return axios.get("/api/user/me");

@@ -7,7 +7,7 @@ export default function Input(props: InputProps) {
     <input
       {...props}
       className={
-        "px-2 py-1 border border-solid border-Black/50 focus-within:border-Black rounded-sm inline-block" +
+        "px-2 py-1 border border-solid border-Black/50 focus-within:border-Black rounded-md inline-block" +
         ` ${props.className}`
       }
     />
