@@ -1,4 +1,9 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios from "axios";
 
 export type TReport = {
@@ -121,9 +126,28 @@ type TSaveCommentBody = { category_id: number; text: string };
 const saveComment = (data: TSaveCommentBody) =>
   axios.post("/api/manager/category/comment", data);
 export function useSaveComment() {
+  const client = useQueryClient();
+
   return useMutation<void, unknown, TSaveCommentBody>({
     mutationFn: (data) => {
-      return saveComment(data).then((res) => res.data);
+      return saveComment(data).then((res) => {
+        client.setQueryData<TCategoriesResponse["categories"]>(
+          ["categories"],
+          (old) => {
+            if (!old) return old;
+            return old.map((c) => {
+              if (c.id === data.category_id) {
+                return {
+                  ...c,
+                  comment: data.text,
+                };
+              } else {
+                return c;
+              }
+            });
+          }
+        );
+      });
     },
   });
 }

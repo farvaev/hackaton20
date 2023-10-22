@@ -8,14 +8,14 @@ import toast from "react-hot-toast";
 export function Categories() {
   const { data: categories, isLoading } = useCategories();
 
-  useEffect(() => {
-    if (!categories) return;
-    setCategoryId(categories[0]?.id || null);
-  }, [categories]);
-
   const [categoryId, setCategoryId] = useState<number | null>(null);
 
   const category = categories?.find((c) => c.id === categoryId);
+
+  useEffect(() => {
+    if (!categories || categoryId) return;
+    setCategoryId(categories[0]?.id || null);
+  }, [categories]);
 
   return (
     <>
