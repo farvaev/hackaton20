@@ -75,6 +75,9 @@ const Category = ({ category }: { category: TCategory }) => {
           <span>{category.name}</span>
         </div>
         <div className="py-2 gap-1 flex flex-col items-stretch">
+          {isLoading ? (
+            <div className="text-slate-500 text-sm">Загрузка...</div>
+          ) : null}
           {!len && !isLoading ? (
             <div className="text-slate-500 text-sm">Нет ошибок</div>
           ) : null}
@@ -126,7 +129,7 @@ const Category = ({ category }: { category: TCategory }) => {
             disabled={isPending}
           />
           <button
-            className="disabled:pointer-events-none disabled:animate-pulse disabled:opacity-70 cursor-pointer py-1 px-2 text-white bg-MainBlue rounded-md"
+            className="disabled:pointer-events-none disabled:animate-pulse disabled:opacity-70 cursor-pointer py-1 px-2 text-white hover:bg-MainBlue/80 bg-MainBlue rounded-md"
             type="submit"
             disabled={isPending}
           >
@@ -139,7 +142,7 @@ const Category = ({ category }: { category: TCategory }) => {
         <div className="mt-2">
           <label className="inline-flex items-center gap-2 text-slate-600 text-sm">
             <input
-              className=""
+              className="accent-green-600 cursor-pointer"
               type="checkbox"
               defaultChecked={false}
               onChange={(e) => {
