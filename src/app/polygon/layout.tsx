@@ -13,7 +13,24 @@ export default function PolygonLayout({
   const { data: user, isLoading, error } = useCurrentUser();
 
   useWebsocket((msg) => {
-    toast.success(msg);
+    toast(
+      (t) => {
+        return (
+          <div>
+            {msg}
+            <button
+              className="p-1 leading-none translate-x-2 text-lg inline-block cursor-pointer text-Gray hover:text-Black"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              <span>×</span>
+            </button>
+          </div>
+        );
+      },
+      {
+        duration: Infinity,
+      }
+    );
   });
 
   return (
