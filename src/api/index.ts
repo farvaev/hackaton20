@@ -86,7 +86,7 @@ export function useReports(category: number) {
     queryFn: ({ pageParam }) => {
       return getReports({
         category_id: category,
-        limit: 1,
+        limit: 10,
         offset: pageParam as number,
       });
     },
