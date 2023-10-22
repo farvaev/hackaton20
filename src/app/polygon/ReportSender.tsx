@@ -7,10 +7,10 @@ export function ReportSender() {
   const { mutate: send, error, isPending, data: response } = useSendReport();
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <div>
         <button
-          className="text-white bg-Red rounded-sm px-2 py-1 disabled:animate-pulse disabled:opacity-70"
+          className="text-white text-sm hover:bg-Red/80 bg-Red rounded-sm px-2 py-1 disabled:animate-pulse disabled:opacity-70"
           onClick={() => {
             send(generateReport());
           }}
@@ -19,7 +19,7 @@ export function ReportSender() {
           Отправить ошибку
         </button>
       </div>
-      <div>
+      <div className="opacity-80 text-sm">
         {error ? (
           <div className="rounded-sm px-2 py-1 text-Red bg-Red/20">
             Не удалось отправить отчёт:

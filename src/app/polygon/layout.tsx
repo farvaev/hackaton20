@@ -2,6 +2,7 @@
 
 import { useCurrentUser } from "@/api";
 import { useWebsocket } from "@/websocket";
+import Link from "next/link";
 import toast from "react-hot-toast";
 
 export default function PolygonLayout({
@@ -9,7 +10,7 @@ export default function PolygonLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { data: user, isLoading } = useCurrentUser();
+  const { data: user, isLoading, error } = useCurrentUser();
 
   useWebsocket((msg) => {
     toast.success(msg);
@@ -17,22 +18,24 @@ export default function PolygonLayout({
 
   return (
     <div>
-      <header className="shadow-md">
-        <div className="max-w-3xl m-auto flex justify-between p-2">
+      <header className="p-2 max-w-3xl m-auto">
+        <div className="border-b border-solid border-slate-300 flex justify-between px-2 py-4">
           <div />
           <div>
-            {isLoading
-              ? "..."
-              : user?.name || (
-                  <span className="italic text-Gray">Без имени</span>
-                )}
+            {isLoading ? (
+              "..."
+            ) : error ? (
+              <Link href={"/"}>Войти</Link>
+            ) : (
+              user?.name || <span className="italic text-Gray">Без имени</span>
+            )}
           </div>
         </div>
       </header>
       {/* <div className="px-2 py-1">
         <Nav />
       </div> */}
-      <div className="px-2 py-1 max-w-3xl m-auto">{children}</div>
+      <div className="px-2 py-4 max-w-3xl m-auto">{children}</div>
     </div>
   );
 }
