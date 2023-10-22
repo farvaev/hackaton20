@@ -18,7 +18,7 @@ export function useSendReport() {
   });
 }
 
-type TRegisterBody = { login: string; password: string };
+type TRegisterBody = { name: string; password: string };
 export function register(data: TRegisterBody) {
   return axios.post("/api/user", data);
 }
@@ -35,6 +35,10 @@ export type TCategory = {
   id: number;
   name: string;
   count: number;
+  is_done: boolean;
+  comment: {
+    text: string;
+  };
 };
 export type TCategoriesResponse = {
   categories: Array<TCategory>;
@@ -59,11 +63,15 @@ export type TResponseReport = {
   log: string;
   user_id: number;
 };
-export type TReportsBody = { category: number; limit: number; offset: number };
+export type TReportsBody = {
+  category_id: number;
+  limit: number;
+  offset: number;
+};
 export type TReportsResponse = Array<TResponseReport>;
 const getReports = (data: TReportsBody) =>
   axios
-    .post("/api/manager/reports", { ...data, limit: 10, offset: 0 })
+    .post("/api/manager/reports", { ...data })
     .then((res) => res.data.reports);
 export function useGetReports() {
   return useMutation<TReportsResponse, unknown, TReportsBody>({
@@ -77,8 +85,8 @@ export function useReports(category: number) {
     queryKey: ["reports", { category }],
     queryFn: ({ pageParam }) => {
       return getReports({
-        category,
-        limit: 10,
+        category_id: category,
+        limit: 1,
         offset: pageParam as number,
       });
     },

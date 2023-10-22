@@ -17,7 +17,7 @@ export default function Register() {
         const password = data.get("password");
         if (!login || !password) return;
         register({
-          login: login as string,
+          name: login as string,
           password: password as string,
         }).then(() => {
           router.replace("/polygon");
@@ -27,10 +27,10 @@ export default function Register() {
     >
       <div className="flex flex-col gap-2 p-2 items-stretch">
         <Input name="login" placeholder="login" />
-        <Input name="password" placeholder="password" />
+        <Input name="password" type="password" placeholder="password" />
         <button
           type="submit"
-          className="rounded-sm bg-Green p-2 text-white hover:bg-Green/70 disabled:animate-pulse disabled:opacity-70"
+          className="rounded-sm bg-Green p-2 text-white hover:bg-Green/70 disabled:animate-pulse disabled:opacity-70 disabled:pointer-events-none"
           disabled={isPending || isSuccess}
         >
           Войти
