@@ -13,16 +13,20 @@ export default function PolygonLayout({
   const { data: user, isLoading, error } = useCurrentUser();
 
   useWebsocket((msg) => {
-    toast(
+    toast.success(
       (t) => {
         return (
-          <div>
+          <div
+            className="break-words text-sm"
+            style={{ wordBreak: "break-all" }}
+          >
             {msg}
+            <br />
             <button
-              className="p-1 leading-none translate-x-2 text-lg inline-block cursor-pointer text-Gray hover:text-Black"
+              className="mt-2 text-xs py-1 leading-none inline-block cursor-pointer text-Gray hover:text-Black underline hover:decoration-transparent"
               onClick={() => toast.dismiss(t.id)}
             >
-              <span>×</span>
+              Скрыть
             </button>
           </div>
         );
