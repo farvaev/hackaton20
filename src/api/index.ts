@@ -54,7 +54,7 @@ export type TCategoriesResponse = {
 export function getCategories() {
   return axios
     .get<TCategoriesResponse>("/api/manager/categories")
-    .then((res) => res.data.categories);
+    .then((res) => res.data.categories.sort());
 }
 export function useCategories() {
   return useQuery({
@@ -130,7 +130,7 @@ export function useSaveComment() {
 
   return useMutation<void, unknown, TSaveCommentBody>({
     mutationFn: (data) => {
-      return saveComment(data).then((res) => {
+      return saveComment(data).then(() => {
         client.setQueryData<TCategoriesResponse["categories"]>(
           ["categories"],
           (old) => {
