@@ -31,42 +31,54 @@ export function useRegister() {
 
 // categories
 export type TCategory = {
-  id: number,
-  name: string,
-  count: number
-}
+  id: number;
+  name: string;
+  count: number;
+};
 export type TCategoriesResponse = {
-  categories: Array<TCategory>
-}
+  categories: Array<TCategory>;
+};
 export function getCategories() {
-  return axios.get<TCategoriesResponse>("/api/manager/categories").then((res) => res.data.categories)
+  return axios
+    .get<TCategoriesResponse>("/api/manager/categories")
+    .then((res) => res.data.categories);
 }
 export function useCategories() {
-  return useQuery(
-    {
-      queryKey: ['categories'],
-      queryFn: () => getCategories()
-    } 
-  )
+  return useQuery({
+    queryKey: ["categories"],
+    queryFn: () => getCategories(),
+  });
 }
 
 // reports
 export type TResponseReport = {
-  category: string,
-  create_date: string,
-  id: string,
-  log: string,
-  user_id: number
-}
-export type TReportsBody = { category: number }
-export type TReportsResponse = Array<TResponseReport>
-const getReports = (data: TReportsBody) => axios.post("/api/manager/reports", data).then((res) => res.data.reports)
+  category: string;
+  create_date: string;
+  id: string;
+  log: string;
+  user_id: number;
+};
+export type TReportsBody = { category: number };
+export type TReportsResponse = Array<TResponseReport>;
+const getReports = (data: TReportsBody) =>
+  axios.post("/api/manager/reports", data).then((res) => res.data.reports);
 export function useReports() {
   return useMutation<TReportsResponse, unknown, TReportsBody>({
     mutationFn: (data) => {
-      return getReports(data)
-    }
-  })
+      return getReports(data);
+    },
+  });
 }
 
-
+type TUser = { name: string; id: string };
+export function getCurrentUser() {
+  return axios.get("/api/user/me");
+}
+export function useCurrentUser() {
+  return useQuery<TUser>({
+    queryKey: ["users", "current"],
+    queryFn: () => {
+      return getCurrentUser().then((res) => res.data);
+    },
+  });
+}
