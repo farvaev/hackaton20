@@ -10,7 +10,7 @@ export function ReportSender() {
     <div className="flex flex-col gap-3">
       <div>
         <button
-          className="text-white text-sm hover:bg-Red/80 bg-Red rounded-sm px-2 py-1 disabled:animate-pulse disabled:opacity-70 disabled:pointer-events-none"
+          className="text-white hover:bg-Red/80 bg-Red rounded-md px-2 py-1 disabled:animate-pulse disabled:opacity-70 disabled:pointer-events-none"
           onClick={() => {
             send(generateReport());
           }}

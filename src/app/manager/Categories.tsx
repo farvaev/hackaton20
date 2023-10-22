@@ -97,7 +97,7 @@ const Category = ({ category }: { category: TCategory }) => {
               return page.map((report) => (
                 <div
                   key={`${report.id}-${report.user_id}`}
-                  className="p-2 text-sm text-Red bg-red-100 rounded-md"
+                  className="p-2 text-sm text-Red bg-red-100 rounded-md break-words"
                 >
                   {report.log}
                 </div>
