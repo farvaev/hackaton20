@@ -68,13 +68,13 @@ const Category = ({ category }: { category: TCategory }) => {
   return (
     <div
       key={`${category.id}-${category.name}`}
-      className="flex flex-col justify-between w-full"
+      className="flex flex-col justify-between w-full overflow-auto max-h-[calc(512px-1.5rem)] -my-3 py-3"
     >
-      <div>
+      <div className="shrink">
         <div className="p-2 text-center font-semibold">
           <span>{category.name}</span>
         </div>
-        <div className="py-2 gap-1 flex flex-col items-stretch">
+        <div className="py-2 flex flex-col gap-1">
           {isLoading ? (
             <div className="text-slate-500 text-sm">Загрузка...</div>
           ) : null}
@@ -86,7 +86,7 @@ const Category = ({ category }: { category: TCategory }) => {
               return page.map((report) => (
                 <div
                   key={`${report.id}-${report.user_id}`}
-                  className="p-2 text-sm text-Red bg-red-200 rounded-sm"
+                  className="p-2 text-sm text-Red bg-red-100 rounded-md"
                 >
                   {report.log}
                 </div>
