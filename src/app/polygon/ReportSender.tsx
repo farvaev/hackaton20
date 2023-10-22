@@ -19,16 +19,16 @@ export function ReportSender() {
           Отправить ошибку
         </button>
       </div>
-      <div className="opacity-80 text-sm">
+      <div className="opacity-80">
         {error ? (
-          <div className="rounded-sm px-2 py-1 text-Red bg-Red/20">
+          <div className="rounded-md px-2 py-1 text-Red bg-Red/20">
             Не удалось отправить отчёт:
             <br />
             {error + ""}
           </div>
         ) : null}
         {response ? (
-          <div className="rounded-sm px-2 py-1 text-Red bg-Red/20">
+          <div className="rounded-md px-2 py-1 text-Red bg-Red/20">
             {response.message}
           </div>
         ) : null}
