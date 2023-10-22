@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export type TReport = {
@@ -59,14 +59,34 @@ export type TResponseReport = {
   log: string;
   user_id: number;
 };
-export type TReportsBody = { category: number };
+export type TReportsBody = { category: number; limit: number; offset: number };
 export type TReportsResponse = Array<TResponseReport>;
 const getReports = (data: TReportsBody) =>
-  axios.post("/api/manager/reports", data).then((res) => res.data.reports);
-export function useReports() {
+  axios
+    .post("/api/manager/reports", { ...data, limit: 10, offset: 0 })
+    .then((res) => res.data.reports);
+export function useGetReports() {
   return useMutation<TReportsResponse, unknown, TReportsBody>({
     mutationFn: (data) => {
       return getReports(data);
+    },
+  });
+}
+export function useReports(category: number) {
+  return useInfiniteQuery<TReportsResponse, unknown>({
+    queryKey: ["reports", { category }],
+    queryFn: ({ pageParam }) => {
+      return getReports({
+        category,
+        limit: 10,
+        offset: pageParam as number,
+      });
+    },
+    initialPageParam: 0,
+    getNextPageParam: (_, pages) => {
+      return pages.reduce((length, page) => {
+        return length + page.length;
+      }, 0);
     },
   });
 }
