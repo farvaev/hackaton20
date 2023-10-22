@@ -30,7 +30,7 @@ export default function Register() {
         <Input name="password" type="password" placeholder="password" />
         <button
           type="submit"
-          className="rounded-sm bg-Green p-2 text-white hover:bg-Green/70 disabled:animate-pulse disabled:opacity-70 disabled:pointer-events-none"
+          className="rounded-md bg-Green px-2 py-1 text-white hover:bg-Green/70 disabled:animate-pulse disabled:opacity-70 disabled:pointer-events-none"
           disabled={isPending || isSuccess}
         >
           Войти
@@ -40,7 +40,7 @@ export default function Register() {
       <div className="h-2" />
 
       {error ? (
-        <div className="p-2 text-Red bg-Red/20 rounded-sm">
+        <div className="p-2 text-Red bg-Red/20 rounded-md">
           Ошибка регистрации:
           <br />
           {error + ""}
