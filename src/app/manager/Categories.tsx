@@ -118,7 +118,7 @@ const Category = ({ category }: { category: TCategory }) => {
               text: text,
               category_id: category.id,
             }).then(() => {
-              toast.success("Коммент сохранён");
+              toast.success("Комментарий сохранён");
             });
           }}
         >
@@ -126,6 +126,7 @@ const Category = ({ category }: { category: TCategory }) => {
             name="text"
             className="grow"
             placeholder="Комментарий"
+            defaultValue={category.comment || ""}
             disabled={isPending}
           />
           <button
